@@ -58,6 +58,13 @@ table {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
 html, body {
-	height: 85%;
+
+}
+h1.title {
+	text-align: center;
+}
+div.board {
+	width: 800px;
+	margin: 0 auto;
 }
 
