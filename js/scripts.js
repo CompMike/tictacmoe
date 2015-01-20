@@ -1,4 +1,7 @@
 //Create a javascript tic tac toe game
-//
 
-currentSquare = $("");
+
+//find the current box checked
+//compare it to the other boxes
+
+var $currentSquare = $("");
