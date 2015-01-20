@@ -1,1 +1,1 @@
-# tictacmoe
+# A tic tac toe game.
