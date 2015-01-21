@@ -64,12 +64,42 @@ h1.title {
 	text-align: center;
 }
 div.board {
-	width: 800px;
+	width: 600px;
 	margin: 0 auto;
 }
 .option {
 	width: 33%;
 	height: 200px;
 	float: left;
-	border: 1px solid black;
+	border: 3px solid black;
+	border-radius: 10px;
+	cursor: pointer;
+}
+#box0 {
+	border-left: none;
+	border-top: none;
+}
+#box1 {
+	border-top: none;
+}
+#box2 {
+	border-top: none;
+	border-right:none;
+}
+#box3 {
+	border-left: none;
+}
+#box5 {
+	border-right: none;
+}
+#box6 {
+	border-left: none;
+	border-bottom: none;
+}
+#box7 {
+	border-bottom: none;
+}
+#box8 {
+	border-right: none;
+	border-bottom: none;
 }
