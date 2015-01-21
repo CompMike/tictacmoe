@@ -7,12 +7,20 @@ $( document ).ready(function() {
 //When it's selected add in the computers selection
 //loop the above until somone wins or there's a tie
 
-	function render() {
-		var startingBlock = Math.floor(Math.random()*8);
-		console.log(startingBlock);
+	function renderBoard() {
+		//set the first X on the board
+		var startingPos = Math.floor(Math.random()*9);
+		console.log(startingPos);
+		//loop through 9 tiles until the board is complete
 		for (var i = 0; i < 9; i++) {
-			$("div.board").append("<div class='option' id='box" + i + "'></div>");
 			console.log(i);
+			//Add the startingPos in one of the squares
+			if (startingPos === i) {
+				$("div.board").append("<div class='option' id='box" + i + "'>X</div>");
+			} else {
+				$("div.board").append("<div class='option' id='box" + i + "'></div>");
+			}
+			//when a box is clicked add a check in another random square unselected square
 		};
 	}
 
@@ -22,5 +30,5 @@ $("#newgame").on("click", function(){
 	console.log("click");
 });
 
-	render();
+	renderBoard();
 });
