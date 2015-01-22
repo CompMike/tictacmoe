@@ -72,7 +72,6 @@ div.board {
 	height: 200px;
 	float: left;
 	border: 3px solid black;
-	border-radius: 10px;
 	cursor: pointer;
 }
 #box0 {
@@ -102,4 +101,12 @@ div.board {
 #box8 {
 	border-right: none;
 	border-bottom: none;
+}
+/*------ Input Styles -------*/
+input[type=checkbox] {
+	display: none;
+}
+label {
+	display: block;
+
 }
