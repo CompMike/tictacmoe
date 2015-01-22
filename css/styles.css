@@ -47,21 +47,28 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
 
 /*----- Includes ----- */
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 /*----- Beginning styles -----*/
 
-/* apply a natural box layout model to all elements */
-*, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
 html, body {
-
+	background-color: #171d25;
+	color: white;
+}
+.main-content {
+	padding: 100px;
 }
 h1.title {
 	text-align: center;
+	color: #00aeef;
+	font-size: 3em;
+	font-family: arial-black;
 }
 div.board {
 	width: 600px;
@@ -71,8 +78,9 @@ div.board {
 	width: 33%;
 	height: 200px;
 	float: left;
-	border: 3px solid black;
+	border: 10px solid white;
 	cursor: pointer;
+
 }
 #box0 {
 	border-left: none;
@@ -108,5 +116,21 @@ input[type=checkbox] {
 }
 label {
 	display: block;
-
+	position: relative;
+}
+.x:after {
+	content: "X";
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 200px;
+	font-family: arial-black;
+}
+.o:after {
+	content: "O";
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 200px;
+	font-family: arial-black;
 }
