@@ -47,7 +47,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/* apply a natural box layout model to all elements */
+/*----- Apply a natural box layout model to all elements -----*/
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
@@ -68,7 +68,7 @@ h1.title {
 	text-align: center;
 	color: #00aeef;
 	font-size: 3em;
-	font-family: arial-black;
+	font-family: "Arial Black";
 }
 div.board {
 	width: 600px;
@@ -111,7 +111,7 @@ div.board {
 	border-bottom: none;
 }
 /*------ Input Styles -------*/
-input[type=checkbox] {
+input[type=radio] {
 	display: none;
 }
 label {
@@ -124,7 +124,7 @@ label {
 	top: 0;
 	left: 0;
 	font-size: 200px;
-	font-family: arial-black;
+	font-family: "Arial Black";
 }
 .o:after {
 	content: "O";
@@ -132,5 +132,5 @@ label {
 	top: 0;
 	left: 0;
 	font-size: 200px;
-	font-family: arial-black;
+	font-family: "Arial Black";
 }
