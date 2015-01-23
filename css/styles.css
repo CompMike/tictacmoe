@@ -48,12 +48,12 @@ table {
 	border-spacing: 0;
 }
 /*----- Apply a natural box layout model to all elements -----*/
+html {
+  box-sizing: border-box;
+}
 *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
-
-/*----- Includes ----- */
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+  box-sizing: inherit;
+}
 
 /*----- Beginning styles -----*/
 
@@ -66,12 +66,12 @@ html, body {
 }
 h1.title {
 	text-align: center;
-	color: #00aeef;
-	font-size: 3em;
+	font-size: 4em;
 	font-family: "Arial Black";
+	margin-bottom: 25px;
 }
 div.board {
-	width: 600px;
+	width: 640px;
 	margin: 0 auto;
 }
 .option {
@@ -118,19 +118,30 @@ label {
 	display: block;
 	position: relative;
 }
+
 .x:after {
-	content: "X";
+	content: " ";
 	position: absolute;
-	top: 0;
-	left: 0;
+	background-image: url(../img/x.svg);
+	background-repeat: no-repeat;
+	background-size: 160px 160px;
+	top: 10px;
+	left: 15px;
+	width:175px;
+	height:175px;
 	font-size: 200px;
 	font-family: "Arial Black";
 }
 .o:after {
-	content: "O";
+	content: " ";
 	position: absolute;
-	top: 0;
-	left: 0;
+	background-image: url(../img/o.svg);
+	background-repeat: no-repeat;
+	background-size: 160px 160px;
+	top: 10px;
+	left: 15px;
+	width:175px;
+	height:175px;
 	font-size: 200px;
 	font-family: "Arial Black";
 }

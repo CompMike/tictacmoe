@@ -30,7 +30,22 @@ $( document ).ready(function() {
 		};
 	//function to check the status of the board and break if someone wins
 	var checkStatus = function() {
+		for (var i = winningBoards.length - 1; i >= 0; i--) {
+			if (_.contains(winningBoards[i],playerBoard)) {
+				console.log("yes");
+			};
+		};
+		// for (var i = winningBoards.length - 1; i >= 0; i--) {
+		// 	winningBoards[i].indexOf(playerBoard);
+		// };
+		// var idx = winningBoards.indexOf(playerBoard);
+		// while (idx != 1) {
 
+		// }
+		// if ($.inArray(playerBoard,winningBoards)) {
+		// 	//add X to non occupied spot
+		// 	console.log('win');
+		// }
 	};
 	//function for each move
 	var move = function() {
@@ -46,8 +61,9 @@ $( document ).ready(function() {
 		console.log("playerboard [" + playerBoard + "]");
 		console.log("computerboard [" + compBoard + "]");
 		console.log("completeboard [" + completeBoard + "]");
+		checkStatus();
 	}
-	//when a box is clicked add a check in another random square unselected square
+	//when a box is clicked begin move function
 	$(".option").on("click", move);
 
 }
