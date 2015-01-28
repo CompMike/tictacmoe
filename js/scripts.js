@@ -1,9 +1,10 @@
 //Create a javascript tic tac toe game
 $( document ).ready(function() {
+	//set up player, computer and complete boards
 	var playerBoard = [];
 	var compBoard = [];
 	var completeBoard = [];
-	//To win the board must contain the combinations below
+	//to win the board must contain the combinations below
 	var winningBoards = [["box0","box1","box2"],
 											["box3","box4","box5"],
 											["box6","box7","box8"],
@@ -21,8 +22,8 @@ $( document ).ready(function() {
 		//loop through 9 tiles until the board is complete
 		for (var i = 0; i < 9; i++) {
 			var box = "box" + i;
-			//Add the startingPos in one of the squares
 			if (startingPos === i) {
+				//Add the startingPos in one of the squares
 				$("div.board").append("<label class='option x selected' for='" + box + "' id='" + box +"'></label><input type='radio' id='" + box + "'>");
 			} else {
 				$("div.board").append("<label class='option' for='" + box + "' id='" + box +"'></label><input type='radio' id='" + box + "'>");
@@ -32,21 +33,18 @@ $( document ).ready(function() {
 	var checkBoards = function(playerBoardState,winCondition) {
 		// console.log(playerBoardState);
 		for (var i = 0; i < winCondition.length; i++) {
-			console.log(winCondition[i]);
+			// console.log(winCondition[i]);
 			var count = 0;
 			for (var j = 0; j < winCondition[i].length; j++) {
-				console.log(playerBoard[j] + "===" + winCondition[i][j]);
+				// console.log(playerBoardState[j] + "===" + winCondition[i][j]);
 				if ($.inArray(playerBoard[j],winCondition[i]) != -1) {
-					console.log("in the array");
+					// console.log("in the array");
 					count++;
 				} ;
-				// if (winCondition[i][j] === playerBoard[j]) {
-				// 	count++;
-				// 	console.log(count);
-				// };
 			};
 			if(count > 2) {
 				console.log("win");
+				return true;
 			}
 		};
 
@@ -60,6 +58,17 @@ $( document ).ready(function() {
 		// };
 		checkBoards(compBoard,winningBoards);
 	};
+	var compMove = function() {
+		var movesLeft = [];
+		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
+		for (var i = 0; i < wholeBoard.length; i++) {
+			if (completeBoard[i] != wholeBoard[i]){
+				movesLeft.push(wholeBoard[i]);
+			}
+		};
+	console.log("movesleft equals: " + movesLeft);
+	}
+
 	//function for each move
 	var move = function() {
 		var $this = $(this);
@@ -71,10 +80,11 @@ $( document ).ready(function() {
 		var current = $this.get(0).id;
 		playerBoard.push(current);
 		completeBoard.push(current);
-		console.log("playerboard [" + playerBoard + "]");
-		console.log("computerboard [" + compBoard + "]");
-		console.log("completeboard [" + completeBoard + "]");
+		// console.log("playerboard [" + playerBoard + "]");
+		// console.log("computerboard [" + compBoard + "]");
+		// console.log("completeboard [" + completeBoard + "]");
 		checkStatus();
+		compMove();
 	}
 	//when a box is clicked begin move function
 	$(".option").on("click", move);
