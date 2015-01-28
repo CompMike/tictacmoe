@@ -59,14 +59,27 @@ $( document ).ready(function() {
 		checkBoards(compBoard,winningBoards);
 	};
 	var compMove = function() {
-		var movesLeft = [];
+		var availableSpaces = [];
+
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
+
+		console.log(wholeBoard);
+		console.log(completeBoard);
 		for (var i = 0; i < wholeBoard.length; i++) {
-			if (completeBoard[i] != wholeBoard[i]){
-				movesLeft.push(wholeBoard[i]);
+			// when i = 0, wholeBoard[i] = "box0", completeBoard[i] = "box1"
+			if ($.inArray(wholeBoard[i],completeBoard) === -1){
+				availableSpaces.push(wholeBoard[i]);
 			}
 		};
-	console.log("movesleft equals: " + movesLeft);
+		var nextMove = Math.floor(Math.random()*availableSpaces.length);
+		console.log("nextMove == " + nextMove);
+		$("#box"+nextMove).addClass("x");
+		console.log("box == #box"+nextMove);
+		completeBoard.push("box"+nextMove);
+		//log complete board
+		console.log("completeBoard == " + completeBoard);
+
+	// console.log("movesleft equals: " + availableSpaces);
 	}
 
 	//function for each move
