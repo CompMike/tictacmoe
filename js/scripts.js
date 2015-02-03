@@ -71,13 +71,14 @@ $( document ).ready(function() {
 				availableSpaces.push(wholeBoard[i]);
 			}
 		};
-		var nextMove = Math.floor(Math.random()*availableSpaces.length);
+		var nextMove = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
 		console.log("nextMove == " + nextMove);
-		$("#box"+nextMove).addClass("x");
+		$("#"+nextMove).addClass("x");
 		console.log("box == #box"+nextMove);
-		completeBoard.push("box"+nextMove);
+		completeBoard.push(nextMove);
 		//log complete board
 		console.log("completeBoard == " + completeBoard);
+		console.log("availableSpaces == " + availableSpaces);
 
 	// console.log("movesleft equals: " + availableSpaces);
 	}
