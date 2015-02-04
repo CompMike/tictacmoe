@@ -145,3 +145,26 @@ label {
 	font-size: 200px;
 	font-family: "Arial Black";
 }
+
+div.outcomeBlock {
+	display: none;
+	background-color: #F2C94E;
+	border-radius: 5px;
+	position: absolute;
+	left: 28%;
+	top: 60%;
+	width: 400px;
+	height: 100px;
+	font-family: "Arial Black";
+	text-align: center;
+	padding-top: 30px;
+	font-size: 2em;
+	color: #EE7600;
+}
+.outcomeBlock.show {
+	display: block;
+}
+.subtext {
+	display: block;
+	margin: 10px auto;
+}
