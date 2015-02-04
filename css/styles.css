@@ -160,11 +160,12 @@ div.outcomeBlock {
 	padding-top: 30px;
 	font-size: 2em;
 	color: #EE7600;
+	cursor: pointer;
 }
 .outcomeBlock.show {
 	display: block;
 }
 .subtext {
 	display: block;
-	margin: 10px auto;
+	font-size: .5em;
 }

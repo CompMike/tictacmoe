@@ -43,20 +43,16 @@ $( document ).ready(function() {
 				} ;
 			};
 			if(count > 2) {
-				console.log(message);
-				$(".outcomeBlock").append(message).addClass("show");
-				return true;
+				$(".outcomeBlock").prepend(message).addClass("show");
 			}
 		};
 	}
 
 	var compMove = function() {
 		var availableSpaces = [];
-
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
-
-		console.log(wholeBoard);
-		console.log(completeBoard);
+		console.log('availableSpaces == ' + availableSpaces);
+		// console.log(completeBoard);
 		for (var i = 0; i < wholeBoard.length; i++) {
 			// when i = 0, wholeBoard[i] = "box0", completeBoard[i] = "box1"
 			if ($.inArray(wholeBoard[i],completeBoard) === -1){
@@ -64,40 +60,38 @@ $( document ).ready(function() {
 			}
 		};
 		var nextMove = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
-		// console.log("nextMove == " + nextMove);
 		$("#"+nextMove).addClass("x");
-		// console.log("box == #box"+nextMove);
+		console.log('computers move ==' + nextMove);
 		//add computers move to board
 		completeBoard.push(nextMove);
 		compBoard.push(nextMove);
 		//check status of computer board and show winnder
 		checkBoards(compBoard,winningBoards,"Computer Wins :(");
-		//log complete board
-		// console.log("completeBoard == " + completeBoard);
-		// console.log("availableSpaces == " + availableSpaces);
-
-	// console.log("movesleft equals: " + availableSpaces);
 	}
 
 	//function for each move
 	var move = function() {
 		var $this = $(this);
-			//if already selected don't add selection
-		if (!$this.hasClass("selected")) {
+			//if already selected don't add selection and run computer move
+		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
 			$this.addClass("o").addClass("selected");
+			compMove();
+			//add current selection to board
+			var current = $this.get(0).id;
+			playerBoard.push(current);
+			completeBoard.push(current);
+			console.log("computer board == " + compBoard);
+			checkBoards(playerBoard,winningBoards,"You Win!");
 		};
-		//add current selection to board
-		var current = $this.get(0).id;
-		playerBoard.push(current);
-		completeBoard.push(current);
-		// console.log("playerboard [" + playerBoard + "]");
-		// console.log("computerboard [" + compBoard + "]");
-		// console.log("completeboard [" + completeBoard + "]");
-		checkBoards(playerBoard,winningBoards,"You Win!");
-		compMove();
 	}
 	//when a box is clicked begin move function
 	$(".option").on("click", move);
 }//end of renderBoard function
+//function to restart game when someone wins
+var restartGame = function() {
+	$("div.board").empty();
+	$(".outcomeBlock").removeClass("show").empty();
+	renderBoard();
+}
 renderBoard();
 });
