@@ -38,12 +38,13 @@ $( document ).ready(function() {
 			for (var j = 0; j < winCondition[i].length; j++) {
 				// console.log("playerboard == " + playerBoardState[j] + " and wincondition == " + winCondition[i][j]);
 				if ($.inArray(winCondition[i][j],playerBoardState) != -1) {
-					// console.log("in the array");
+					console.log("in the array");
 					count++;
-				} ;
+				};
 			};
 			if(count > 2) {
 				$(".outcomeBlock").prepend(message).addClass("show");
+				$(".board").on("click",restartGame);
 			}
 		};
 	}
@@ -51,7 +52,6 @@ $( document ).ready(function() {
 	var compMove = function() {
 		var availableSpaces = [];
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
-		console.log('availableSpaces == ' + availableSpaces);
 		// console.log(completeBoard);
 		for (var i = 0; i < wholeBoard.length; i++) {
 			// when i = 0, wholeBoard[i] = "box0", completeBoard[i] = "box1"
@@ -59,6 +59,7 @@ $( document ).ready(function() {
 				availableSpaces.push(wholeBoard[i]);
 			}
 		};
+		console.log('availableSpaces == ' + availableSpaces);
 		var nextMove = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
 		$("#"+nextMove).addClass("x");
 		console.log('computers move ==' + nextMove);
@@ -75,13 +76,14 @@ $( document ).ready(function() {
 			//if already selected don't add selection and run computer move
 		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
 			$this.addClass("o").addClass("selected");
-			compMove();
 			//add current selection to board
 			var current = $this.get(0).id;
 			playerBoard.push(current);
 			completeBoard.push(current);
 			console.log("computer board == " + compBoard);
+			console.log("player board == " + playerBoard);
 			checkBoards(playerBoard,winningBoards,"You Win!");
+			compMove();
 		};
 	}
 	//when a box is clicked begin move function
