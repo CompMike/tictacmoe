@@ -44,8 +44,10 @@ $( document ).ready(function() {
 			};
 			if(count > 2) {
 				$(".outcomeBlock").prepend(message).addClass("show");
-				$(".board").on("click",restartGame);
 			}
+			//  else if (count > 3)
+			// 	$(".board").on("click", restartGame);
+			// }
 		};
 	}
 
@@ -95,5 +97,6 @@ var restartGame = function() {
 	$(".outcomeBlock").removeClass("show").empty();
 	renderBoard();
 }
+
 renderBoard();
 });

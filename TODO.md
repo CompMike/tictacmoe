@@ -9,6 +9,6 @@ TODO:
 Current Issue(2):
 What's the issue: Need to stop game once one player wins and refresh board.
 Why is this happening?: Because the game still accepts clicks once someone wins.
-How do you want it to work?: When someone wins, it shows the message, then on another click the game restarts.
+How do you want it to work?: When someone wins, it shows the message, stops the compMove, then on another click the game restarts.
 How can we fix it?:
 1.) In the checkBoards function if someone wins, listen for a click and re-run renderBoards once that happens.
