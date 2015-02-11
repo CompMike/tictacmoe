@@ -44,10 +44,9 @@ $( document ).ready(function() {
 			};
 			if(count > 2) {
 				$(".outcomeBlock").prepend(message).addClass("show");
+				// $(".outcomeBlock").on("click", restartGame);
+				console.log('count == ' + count);
 			}
-			//  else if (count > 3)
-			// 	$(".board").on("click", restartGame);
-			// }
 		};
 	}
 
@@ -70,6 +69,7 @@ $( document ).ready(function() {
 		compBoard.push(nextMove);
 		//check status of computer board and show winnder
 		checkBoards(compBoard,winningBoards,"Computer Wins :(");
+
 	}
 
 	//function for each move
@@ -85,16 +85,21 @@ $( document ).ready(function() {
 			console.log("computer board == " + compBoard);
 			console.log("player board == " + playerBoard);
 			checkBoards(playerBoard,winningBoards,"You Win!");
+
 			compMove();
 		};
 	}
 	//when a box is clicked begin move function
 	$(".option").on("click", move);
 }//end of renderBoard function
+
 //function to restart game when someone wins
 var restartGame = function() {
 	$("div.board").empty();
 	$(".outcomeBlock").removeClass("show").empty();
+	var playerBoard = [];
+	var compBoard = [];
+	var completeBoard = [];
 	renderBoard();
 }
 
