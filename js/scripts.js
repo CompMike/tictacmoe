@@ -13,7 +13,7 @@ $( document ).ready(function() {
 											["box0","box3","box6"],
 											["box1","box4","box7"],
 											["box2","box5","box8"]];
-	var renderBoard = function() {
+var renderBoard = function() {
 		//set the first X on the board
 		var startingPos = Math.floor(Math.random()*9);
 		//add startingPos to boards
@@ -46,6 +46,7 @@ $( document ).ready(function() {
 				$(".outcomeBlock").prepend(message).addClass("show");
 				// $(".outcomeBlock").on("click", restartGame);
 				console.log('count == ' + count);
+				return true;
 			}
 		};
 	}
@@ -65,6 +66,13 @@ $( document ).ready(function() {
 		$("#"+nextMove).addClass("x");
 		console.log('computers move ==' + nextMove);
 		//add computers move to board
+		if(completeBoard.length === 8) {
+			if(availableSpaces.length === 1) {
+				$(".outcomeBlock").prepend("It's a Tie.").addClass("show");
+			}
+		}
+		console.log("availspaces = " + availableSpaces.length);
+		console.log("completeBoard = " + completeBoard.length);
 		completeBoard.push(nextMove);
 		compBoard.push(nextMove);
 		//check status of computer board and show winnder
@@ -77,16 +85,21 @@ $( document ).ready(function() {
 		var $this = $(this);
 			//if already selected don't add selection and run computer move
 		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
-			$this.addClass("o").addClass("selected");
 			//add current selection to board
 			var current = $this.get(0).id;
-			playerBoard.push(current);
-			completeBoard.push(current);
+			if($.inArray(current,completeBoard) != -1) {
+				alert("can't move");
+			} else {
+				$this.addClass("o").addClass("selected");
+				playerBoard.push(current);
+				completeBoard.push(current);
+				var gameover = checkBoards(playerBoard,winningBoards,"You Win!");
+				if(!gameover) {
+					compMove();
+				}
+			}
 			console.log("computer board == " + compBoard);
 			console.log("player board == " + playerBoard);
-			checkBoards(playerBoard,winningBoards,"You Win!");
-
-			compMove();
 		};
 	}
 	//when a box is clicked begin move function
@@ -102,6 +115,8 @@ var restartGame = function() {
 	var completeBoard = [];
 	renderBoard();
 }
-
+$(".outcomeBlock").on("click",function(){
+	location.reload();
+});
 renderBoard();
 });
