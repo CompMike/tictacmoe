@@ -44,19 +44,40 @@ var renderBoard = function() {
 			};
 			if(count > 2) {
 				$(".outcomeBlock").prepend(message).addClass("show");
-				// $(".outcomeBlock").on("click", restartGame);
 				console.log('count == ' + count);
 				return true;
 			}
 		};
 	}
-
-	var compMove = function() {
+	//new move function
+var newmove = function(player) {
+		var $this = $(this);
+	if(player === "user") {
+		console.log("$this = " + $this);
+		//if already selected don't add selection and run computer move
+		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
+			//add current selection to board
+			var current = $this.get(0).id;
+			console.log("this is current"+ current);
+			if($.inArray(current,completeBoard) != -1) {
+				alert("can't move");
+			} else {
+				$this.addClass("o").addClass("selected");
+				playerBoard.push(current);
+				completeBoard.push(current);
+				var gameover = checkBoards(playerBoard,winningBoards,"You Win!");
+				if(!gameover) {
+					newmove("comp");
+				}
+			}
+			console.log("computer board == " + compBoard);
+			console.log("player board == " + playerBoard);
+		};
+	}
+	if(player === "comp") {
 		var availableSpaces = [];
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
-		// console.log(completeBoard);
 		for (var i = 0; i < wholeBoard.length; i++) {
-			// when i = 0, wholeBoard[i] = "box0", completeBoard[i] = "box1"
 			if ($.inArray(wholeBoard[i],completeBoard) === -1){
 				availableSpaces.push(wholeBoard[i]);
 			}
@@ -71,39 +92,13 @@ var renderBoard = function() {
 				$(".outcomeBlock").prepend("It's a Tie.").addClass("show");
 			}
 		}
-		console.log("availspaces = " + availableSpaces.length);
-		console.log("completeBoard = " + completeBoard.length);
-		completeBoard.push(nextMove);
-		compBoard.push(nextMove);
-		//check status of computer board and show winnder
-		checkBoards(compBoard,winningBoards,"Computer Wins :(");
-
 	}
+}
 
-	//function for each move
-	var move = function() {
-		var $this = $(this);
-			//if already selected don't add selection and run computer move
-		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
-			//add current selection to board
-			var current = $this.get(0).id;
-			if($.inArray(current,completeBoard) != -1) {
-				alert("can't move");
-			} else {
-				$this.addClass("o").addClass("selected");
-				playerBoard.push(current);
-				completeBoard.push(current);
-				var gameover = checkBoards(playerBoard,winningBoards,"You Win!");
-				if(!gameover) {
-					compMove();
-				}
-			}
-			console.log("computer board == " + compBoard);
-			console.log("player board == " + playerBoard);
-		};
-	}
 	//when a box is clicked begin move function
-	$(".option").on("click", move);
+	$(".option").on("click", function () {
+		newmove("user");
+	});
 }//end of renderBoard function
 
 //function to restart game when someone wins
