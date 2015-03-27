@@ -50,66 +50,64 @@ var renderBoard = function() {
 		};
 	}
 	//new move function
-var newmove = function(player) {
-		var $this = $(this);
-	if(player === "user") {
-		console.log("$this = " + $this);
+var move = function(mover, element) {
+	if(mover === "player") {
 		//if already selected don't add selection and run computer move
-		if (!$this.hasClass("selected") || !$this.hasClass("x")) {
+		if (!$(element).hasClass("selected") || !$(element).hasClass("x")) {
 			//add current selection to board
-			var current = $this.get(0).id;
-			console.log("this is current"+ current);
+			var current = $(element).get(0).id;
+			console.log("this is current: "+ current);
 			if($.inArray(current,completeBoard) != -1) {
 				alert("can't move");
 			} else {
-				$this.addClass("o").addClass("selected");
+				$(element).addClass("o").addClass("selected");
 				playerBoard.push(current);
 				completeBoard.push(current);
 				var gameover = checkBoards(playerBoard,winningBoards,"You Win!");
 				if(!gameover) {
-					newmove("comp");
+					move("comp",this);
 				}
 			}
 			console.log("computer board == " + compBoard);
 			console.log("player board == " + playerBoard);
 		};
-	}
-	if(player === "comp") {
+	}//end of
+	if(mover === "comp") {
 		var availableSpaces = [];
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
+		//Add current available spaces to board
 		for (var i = 0; i < wholeBoard.length; i++) {
 			if ($.inArray(wholeBoard[i],completeBoard) === -1){
 				availableSpaces.push(wholeBoard[i]);
 			}
 		};
 		console.log('availableSpaces == ' + availableSpaces);
+		//find a random available space
 		var nextMove = availableSpaces[Math.floor(Math.random()*availableSpaces.length)];
+		//"x" to that random space
 		$("#"+nextMove).addClass("x");
 		console.log('computers move ==' + nextMove);
-		//add computers move to board
-		if(completeBoard.length === 8) {
-			if(availableSpaces.length === 1) {
-				$(".outcomeBlock").prepend("It's a Tie.").addClass("show");
-			}
-		}
-	}
-}
+		//check status of computer board and show winner
 
-	//when a box is clicked begin move function
-	$(".option").on("click", function () {
-		newmove("user");
+			//Check if it's a tie
+			if(completeBoard.length === 8) {
+				if(availableSpaces.length === 1) {
+					$(".outcomeBlock").prepend("It's a Tie.").addClass("show");
+				}
+			}
+		completeBoard.push(nextMove);
+		compBoard.push(nextMove);
+		checkBoards(compBoard,winningBoards,"Computer Wins :(");
+	}//End of comp move statement
+}//End of move function
+
+//when a box is clicked begin move function
+	$(".option").on("click", function(event) {
+		move("player",this);
 	});
 }//end of renderBoard function
 
-//function to restart game when someone wins
-var restartGame = function() {
-	$("div.board").empty();
-	$(".outcomeBlock").removeClass("show").empty();
-	var playerBoard = [];
-	var compBoard = [];
-	var completeBoard = [];
-	renderBoard();
-}
+//restart game when someone clicks the outcomeblock
 $(".outcomeBlock").on("click",function(){
 	location.reload();
 });
