@@ -30,14 +30,12 @@ var renderBoard = function() {
 			}
 		};
 	//functions to check state of boards
-	var checkBoards = function(playerBoardState,winCondition,message) {
-		// console.log(playerBoardState);
-		for (var i = 0; i < winCondition.length; i++) {
-			// console.log(winCondition[i]);
+	var checkBoards = function(playerBoardState,message) {
+		for (var i = 0; i < winningBoards.length; i++) {
 			var count = 0;
-			for (var j = 0; j < winCondition[i].length; j++) {
+			for (var j = 0; j < winningBoards[i].length; j++) {
 				// console.log("playerboard == " + playerBoardState[j] + " and wincondition == " + winCondition[i][j]);
-				if ($.inArray(winCondition[i][j],playerBoardState) != -1) {
+				if ($.inArray(winningBoards[i][j],playerBoardState) != -1) {
 					console.log("in the array");
 					count++;
 				};
@@ -63,7 +61,7 @@ var move = function(mover, element) {
 				$(element).addClass("o").addClass("selected");
 				playerBoard.push(current);
 				completeBoard.push(current);
-				var gameover = checkBoards(playerBoard,winningBoards,"You Win!");
+				var gameover = checkBoards(playerBoard,"You Win!");
 				if(!gameover) {
 					move("comp",this);
 				}
@@ -74,6 +72,7 @@ var move = function(mover, element) {
 	}//end of
 	if(mover === "comp") {
 		var availableSpaces = [];
+		console.log("availableSpaces: " + availableSpaces);
 		var wholeBoard = ["box0","box1","box2","box3","box4","box5","box6","box7","box8"];
 		//Add current available spaces to board
 		for (var i = 0; i < wholeBoard.length; i++) {
@@ -97,7 +96,7 @@ var move = function(mover, element) {
 			}
 		completeBoard.push(nextMove);
 		compBoard.push(nextMove);
-		checkBoards(compBoard,winningBoards,"Computer Wins :(");
+		checkBoards(compBoard,"Computer Wins :(");
 	}//End of comp move statement
 }//End of move function
 
